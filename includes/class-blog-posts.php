@@ -156,7 +156,7 @@ class Blog_Posts {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		// hook for WP Blog Posts plugin settings page
 		$this->loader->add_action( 'admin_menu', $plugin_admin,'wpb_settings_page' );
 		$this->loader->add_action( 'admin_init', $plugin_admin,'wpb_settings_tab' );
 	}
