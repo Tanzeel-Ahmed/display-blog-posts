@@ -99,4 +99,12 @@ class Blog_Posts_Public {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/blog-posts-public.js', array( 'jquery' ), $this->version, false );
 
 	}
+
+	function wpb_page_template( $page_template ){
+		if ( is_page( 'blogs' ) ) {
+			$page_template = plugin_dir_path( __FILE__ ) . 'templates/archive-blog-posts.php';
+		}
+		return $page_template;
+	}
+
 }

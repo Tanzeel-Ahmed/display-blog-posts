@@ -115,85 +115,106 @@ class Blog_Posts_Admin {
 	function wpb_plugin_settings_page() {
 		?>
 		<h1> <?php esc_html_e( 'Welcome to WP Blog Posts Settings page', 'my-plugin-textdomain' ); ?> </h1>
-		<form method="POST" action="options.php">
-		<?php
-		settings_fields( 'wpb-settings-page' );
-		do_settings_sections( 'wpb-settings-page' );
-		submit_button();
-		?>
-		</form>
+		<div class="wrap">
+        <form action="options.php" method="post">
+            <?php
+            // output security fields for the registered setting "wporg"
+            settings_fields( 'wpb_settings_page' );
+            // output setting sections and their fields
+            // (sections are registered for "wporg", each field is registered to a specific section)
+            do_settings_sections( 'wpb_settings_page' );
+            // output save settings button
+            submit_button( 'Save Settings' );
+            ?>
+        </form>
+    </div>
 		<?php
 	}
 	function wpb_settings_tab() {
+		register_setting( 'wpb_settings_page', 'wpb_settings_options' );
 
 		add_settings_section(
 			'wpb_settings_section',
-			__( 'WP Blog Posts Setting fields', 'my-textdomain' ),
-			array( $this,'my_setting_section_callback_function'),
-			'wpb-settings-page'
+			'WP Blog Posts Setting fields',
+			'',
+			'wpb_settings_page'
 		);
 		add_settings_field(
-			'wpb_settings_field_1',
-			__( 'Manage number of Blogs per Page.', 'my-textdomain' ),
+			'wpb_posts_per_page_field',
+			'Manage number of Blogs per Page.',
 			array( $this,'wpb_settings_field_callback_function_1'),
-			'wpb-settings-page',
-			'wpb_settings_section'
+			'wpb_settings_page',
+			'wpb_settings_section',
+			array(
+				'label_for'         => 'wpb_posts_per_page',
+			)
 		);
 		add_settings_field(
-			'wpb_settings_field_2',
-			__( 'Display Blog posts by order.', 'my-textdomain' ),
+			'wpb_order_dropdown_field',
+			'Display Blog posts by order',
 			array( $this,'wpb_settings_field_callback_function_2'),
-			'wpb-settings-page',
-			'wpb_settings_section'
+			'wpb_settings_page',
+			'wpb_settings_section',
+			array(
+				'label_for'         => 'wpb_selected_order',
+			)
 		);
 		add_settings_field(
-			'wpb_settings_field_3',
-			__( 'Display Blogs on category selection.', 'my-textdomain' ),
+			'wpb_cat_dropdown_field',
+			'Display Blogs on category selection.',
 			array( $this,'wpb_settings_field_callback_function_3'),
-			'wpb-settings-page',
-			'wpb_settings_section'
+			'wpb_settings_page',
+			'wpb_settings_section',
+			array(
+				'label_for'         => 'wpb_selected_category',
+			)
 		);
-		register_setting( 'wpb-settings-page', 'wpb_settings_field_1' );
-		register_setting( 'wpb-settings-page', 'wpb_settings_field_2' );
-		register_setting( 'wpb-settings-page', 'wpb_settings_field_3' );
 	}
-	function my_setting_section_callback_function() {
-							
-	}
-	function wpb_settings_field_callback_function_1() {
+	
+	function wpb_settings_field_callback_function_1($args) {
+		$options = get_option( 'wpb_settings_options' );
 		?>
-		<label for="my-input"><?php _e( 'Number of Blogs:' ); ?></label>
-		<input type="number" id="wpb_settings_field_1" name="wpb_settings_field_1"  placeholder="Enter numbers" value="<?php echo get_option( 'wpb_settings_field_1' ); ?>">
+		<input type="number" 
+		id="<?php echo $args['label_for']; ?>" 
+		name="wpb_settings_options[<?php echo $args['label_for']; ?>]"  
+		placeholder="Enter numbers"
+		value="<?php echo $options[$args['label_for']]; ?>">
 		<?php					
 	}
-	function wpb_settings_field_callback_function_2() {
+	function wpb_settings_field_callback_function_2($args) {
+		$options = get_option( 'wpb_settings_options' );
 		?>
-		<label for="blogs-by-order"><?php _e( 'Order by:' ); ?></label>
-		<select name="blogs-by-order" id="blogs-by-order">
-			<option>Select Order</option>
-			<option value="<?php echo get_option( 'wpb_settings_field_2' ); ?>">Ascending</option>
-			<option value="<?php echo get_option( 'wpb_settings_field_2' ); ?>">Descending</option>
+		<select 
+		name="wpb_settings_options[<?php echo $args['label_for']; ?>]"
+		id="<?php echo $args['label_for']; ?>">
+			<option value="rand">Select Order</option>
+			<option <?php  echo ($options[$args['label_for']] == 'asc') ? 'selected' :''; ?> value="asc">Ascending Order</option>
+			<option <?php  echo ($options[$args['label_for']] == 'desc') ? 'selected' :''; ?> value="desc">Descending Order</option>
 		</select>
 		<?php					
 	}
-	function wpb_settings_field_callback_function_3() {
+	function wpb_settings_field_callback_function_3($args) {
+		$options = get_option( 'wpb_settings_options' );
 		?>
-		<label for="blog-categories"><?php _e( 'Select:' ); ?></label>
-		<select name="blog-categories" id="blog-categories">
-			<option value="">Select Categories</option>
+		<select 
+		name="wpb_settings_options[<?php echo $args['label_for']; ?>]" 
+		id="<?php echo $args['label_for']; ?>" >
+			<option value="">Select Category</option>
 			<?php
 				// Get all the categories
 				$categories = get_terms( 'category' );
-
+				var_dump($categories);
+				
 				// Loop through all the returned terms
 				foreach ( $categories as $category ):
 				?>
-			<option value="<?php echo get_option( 'wpb_settings_field_3' ); ?>"><?php echo $category->name ?></option>
+			<option <?php  echo ($options[$args['label_for']] == $category->name) ?  'selected' :''; ?> value="<?php echo $category->name ?>"><?php echo $category->name ?></option>
 			<?php
 			// end the loop
 			endforeach;	
 			?>
 		</select>
-		<?php				
+		<?php		
 	}
+		
 }

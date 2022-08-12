@@ -175,6 +175,10 @@ class Blog_Posts {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
+		/*This is Template Hook and Filter the page_template with our custom function*/
+		$this->loader->add_filter('page_template', $plugin_public, 'wpb_page_template');
+
+		
 	}
 
 	/**
