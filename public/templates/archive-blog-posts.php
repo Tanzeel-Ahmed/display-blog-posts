@@ -27,7 +27,7 @@ get_header();
     while($query->have_posts()) {
         $query->the_post(); 
         ?> 
-        <center> <h2><?php the_title(); ?><p><?php the_content(); ?></p></h2> </center>
+        <h2><?php the_title(); ?><p><?php the_content(); ?></p></h2>
         <?php
     }
   
