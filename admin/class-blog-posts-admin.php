@@ -74,7 +74,7 @@ class Blog_Posts_Admin {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/blog-posts-admin.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style('made-tommy-soft', '//fonts.cdnfonts.com/css/made-tommy-soft-outline');
 	}
 
 	/**
@@ -203,7 +203,6 @@ class Blog_Posts_Admin {
 			<?php
 				// Get all the categories
 				$categories = get_terms( 'category' );
-				var_dump($categories);
 				
 				// Loop through all the returned terms
 				foreach ( $categories as $category ):

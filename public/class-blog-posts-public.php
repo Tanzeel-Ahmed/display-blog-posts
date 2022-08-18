@@ -97,6 +97,7 @@ class Blog_Posts_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/blog-posts-public.js', array( 'jquery' ), $this->version, false );
+		wp_localize_script( $this->plugin_name, 'jquery_object',array( 'ajaxurl' => admin_url( 'admin-ajax.php' ),));
 
 	}
 
@@ -106,5 +107,59 @@ class Blog_Posts_Public {
 		}
 		return $page_template;
 	}
+
+
+	function wpb_load_more_posts(){
+		$options = get_option('wpb_settings_options');
+		$ajaxposts = new WP_Query([
+			'post_type'      => 'post',
+			'post_status'    => 'publish',
+			'posts_per_page' =>  $options['wpb_posts_per_page'],
+			'orderby'        =>  'title',
+			'order'          =>  $options['wpb_selected_order'],
+			'paged' 		 => $_POST['paged'],
+			
+		  ]);
+		$post_meta_array = array();
+		$max_pages = $ajaxposts->max_num_pages;
+		while($ajaxposts->have_posts()) {
+			$ajaxposts->the_post(); 
+			ob_start();
+			?> 
+				<article class="wpb-posts-container">
+				<div class="wpb-posts-category-frame">
+						<div class="wpb-posts-category">
+						<?php
+						foreach((get_the_category()) as $category) { ?>
+							<a href="<?php the_permalink(); ?>"><?php echo $category->cat_name  ?></a>
+							<?php
+						}
+						?>
+						</div>
+					</div>    
+					<div class="wpb-posts-featured-img">
+						<img class="featured-img" src="<?php echo get_the_post_thumbnail_url() ?>" >
+					</div>
+					<div class="wpb-posts-title">
+						<h2>
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						</h2>
+					</div>  
+					<div class="wpb-posts-datetime">
+						<?php echo get_the_date(); ?>
+						<?php echo get_the_time(); ?>
+						<span class="wpb-posts-read"><a href="<?php the_permalink(); ?>">Read</a></span>
+					</div>       
+				</article>
+		
+			<?php
+
+			$html = ob_get_clean();
+			array_push($post_meta_array,$html);
+		}
+		$output = ob_get_contents();
+		wp_send_json($post_meta_array);
+	}
+
 
 }

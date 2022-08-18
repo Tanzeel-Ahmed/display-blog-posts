@@ -159,6 +159,7 @@ class Blog_Posts {
 		// hook for WP Blog Posts plugin settings page
 		$this->loader->add_action( 'admin_menu', $plugin_admin,'wpb_settings_page' );
 		$this->loader->add_action( 'admin_init', $plugin_admin,'wpb_settings_tab' );
+		
 	}
 
 	/**
@@ -177,7 +178,9 @@ class Blog_Posts {
 
 		/*This is Template Hook and Filter the page_template with our custom function*/
 		$this->loader->add_filter('page_template', $plugin_public, 'wpb_page_template');
-
+		// ajax hook for load more posts
+		$this->loader->add_action( 'wp_ajax_wpb_load_more_posts', $plugin_public,'wpb_load_more_posts' );
+		$this->loader->add_action( 'wp_ajax_nopriv_wpb_load_more_posts', $plugin_public,'wpb_load_more_posts');
 		
 	}
 

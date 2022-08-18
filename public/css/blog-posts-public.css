@@ -2,3 +2,75 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+/* .wpb-main-container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-between;
+} */
+.wpb-sub-container{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+    gap : 2px;
+    /* justify-content: space-between; */
+}
+.wpb-posts-container .wpb-posts-featured-img img{
+    width: 384px;
+    height: 186px;
+    border-radius: 8px;
+}
+.wpb-posts-container{
+    width: 33%;
+    position:relative;
+}
+.wpb-posts-container .wpb-posts-title a{
+    font-family: 'MADE Tommy Soft', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.2px;
+    color: #000000;
+    text-decoration: none;
+}
+.wpb-posts-category-frame {
+    position: absolute;
+    padding: 4px 12px;
+    background-color: #fff;
+    border-radius: 8px;
+    left: 16px;
+    top: 16px;
+}
+.wpb-posts-category-frame .wpb-posts-category a{
+    color: #158EFD;
+    text-decoration: none;
+    font-family: 'MADE Tommy Soft', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.15px;
+    text-transform: capitalize;
+}
+.wpb-load-more-btn .load-more-btn {
+    height: 48px;
+    font-family: 'MADE Tommy Soft', sans-serif;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 48px;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.2px;
+    text-transform: uppercase;
+    color: #1A2441;
+    background-color: #50E994;
+    margin: auto;
+    margin-top: 20px;
+}
