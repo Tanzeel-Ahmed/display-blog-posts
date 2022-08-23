@@ -14,11 +14,62 @@
 <body>            
 <?php
 get_header();
-
+?>
+    <div class="wpb-main-container">
+        <?php
+    echo '<ul class="nav-tabs" role="tablist">';
+        $args = array(
+            'taxonomy'    => 'category',
+            'hide_empty'  => 0,
+            'orderby'     => 'name',
+            'order'       => 'ASC',
+            
+        );
+        echo '<li class="all-nav-tabs-list"> All
+             </li>';
+        $categories = get_categories($args);
+        foreach($categories as $category) { 
+                 
+                echo '<li class="single-nav-tabs-list">
+                    
+                    <span data-href="'.$category->slug.'" role="tab" data-toggle="tab">    
+                    '.$category->name.'
+                    </span>
+                </li>';
+        }
+        echo '</ul>';
+        echo '<div class="investors-content">';
+        foreach($categories as $category) { 
+            echo '<div class="tab-pane" id="' . $category->slug.'">';
+            $catslug = $category->slug;
+            $the_query = new WP_Query(array(
+                'post_type' => 'post',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                                array(
+                                    'taxonomy' => 'category',
+                                    'field'    => 'slug',
+                                    'terms'    => array( $catslug ),
+                                    'operator' => 'IN'
+                                ),
+                            ),
+            ));                 
+            while ( $the_query->have_posts() ) : 
+            $the_query->the_post();
+                echo '<h1>';
+                the_title();
+                echo '</h1>';
+            endwhile; 
+            echo '</div>';
+        } 
+        echo '</div>';
+        ?>
+        <div class="wpb-sub-container">
+    <?php
     $options = get_option('wpb_settings_options');
 
     $wpquery = array(
-        
+         
         'post_type'      => 'post',
         'post_status'    => 'publish',
         'posts_per_page' =>  $options['wpb_posts_per_page'],
@@ -27,25 +78,22 @@ get_header();
         'paged'          => 1,
     );
     if(!empty($options['wpb_selected_category'])){
-        $wpquery['tax_query'] =array(
+         $wpquery['tax_query'] =array(
             array(
             'taxonomy'   => 'category',
             'field'      => 'slug',
             'terms'      => $options['wpb_selected_category']
             )
-        ) ;
+        );
     }
+ 
+    $query = new WP_Query($wpquery);
+        while($query->have_posts()) {
+        $query->the_post();
+        ?>
 
-$query = new WP_Query($wpquery);
-?>
-    <div class="wpb-main-container">
-        <div class="wpb-sub-container">
-    <?php
-    while($query->have_posts()) {
-        $query->the_post(); 
-        ?> 
-        
             <article class="wpb-posts-container">
+
             <div class="wpb-posts-category-frame">
                     <div class="wpb-posts-category">
                     <?php
@@ -61,7 +109,7 @@ $query = new WP_Query($wpquery);
                 </div>
                 <div class="wpb-posts-title">
                     <h2>
-                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?> </a>
                     </h2>
                 </div>  
                 <div class="wpb-posts-datetime">
@@ -70,7 +118,7 @@ $query = new WP_Query($wpquery);
                     <span class="wpb-posts-read"><a href="<?php the_permalink(); ?>">Read</a></span>
                 </div>       
             </article>
-<?php }
+<?php   }
     wp_reset_postdata();
     $query = array(
         'post_type'      => 'post',

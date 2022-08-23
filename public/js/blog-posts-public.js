@@ -29,8 +29,8 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 	
-	// custom ajax for load more posts
-	$(document).ready(function(){
+// custom ajax for load more posts
+$(document).ready(function(){
 		var currentPage = 1;
 		$('.load-more-btn').click(function(){
 			var total_pages = $('.load-more-btn').data('totalpages');
@@ -49,8 +49,55 @@
 				$('.wpb-sub-container').append(response);
 			});
 		})
-	})
-	 
+
+		// custom js for category base post
+	$(".investors-content .tab-pane").each(function(){
+		$(this).hide();
+		$('.investors-content .tab-pane:first-child()').show();
+	});
+	$('.nav-tabs li >span').on( "click", function(e) {
+		e.preventDefault();
+		var id = $(this).attr('data-href');
+		$(".investors-content .tab-pane").each(function(){
+			$(this).hide();
+			if($(this).attr('id') == id) {
+				$(this).show();
+			}
+		});
+	});
+	// Displayed All Posts When Click on All nav tab list
+	$('.all-nav-tabs-list').on( "click", function(e) {
+		e.preventDefault();
+		$(".investors-content .tab-pane").each(function(){
+			$(this).show();
+		});
+	});
+	// Displayed All Posts When open blog page 
+	if ($(".all-nav-tabs-list")) {
+		$(".investors-content .tab-pane").each(function(){
+			$(this).show();
+		});
+	}
+	// Added active class on All nav tab list
+	$(".all-nav-tabs-list").addClass("active");
+	$(".all-nav-tabs-list").click(function () {
+		if($(".all-nav-tabs-list").hasClass("active")){
+			$(".all-nav-tabs-list").removeClass("active");
+			$(".single-nav-tabs-list").removeClass("active");
+		}
+			$(this).addClass("active");
+	});
+	// Added active class when click on specific nav tab list
+	$(".single-nav-tabs-list").click(function () {
+		if($(".single-nav-tabs-list").hasClass("active")){
+			$(".single-nav-tabs-list").removeClass("active");
+			$(".all-nav-tabs-list").removeClass("active");
+		}
+			$(this).addClass("active");
+	});
+	
+})
+
 })( jQuery );
 
 

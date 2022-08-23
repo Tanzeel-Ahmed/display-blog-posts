@@ -2,22 +2,26 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
-/* .wpb-main-container{
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 900px;
-    width: 100%;
+.wpb-main-container{
+    width: 1280px;
+    height: 1178px;
     margin: 0 auto;
-    justify-content: space-between;
-} */
+}
+.site-inner {
+    max-width: inherit;
+}
+h2{
+    margin: 0;
+    padding-block: 24px;
+}
 .wpb-sub-container{
     display: flex;
     flex-wrap: wrap;
-    max-width: 900px;
-    width: 100%;
-    margin: 0 auto;
-    gap : 2px;
-    /* justify-content: space-between; */
+    /* margin: 0 auto; */
+    /* border: 1px solid red; */
+    gap :0px;
+    width: 1280px;
+    justify-content: space-between;     
 }
 .wpb-posts-container .wpb-posts-featured-img img{
     width: 384px;
@@ -25,8 +29,9 @@
     border-radius: 8px;
 }
 .wpb-posts-container{
-    width: 33%;
+    width: 30%;
     position:relative;
+    padding-bottom: 48px;
 }
 .wpb-posts-container .wpb-posts-title a{
     font-family: 'MADE Tommy Soft', sans-serif;
@@ -73,4 +78,33 @@
     background-color: #50E994;
     margin: auto;
     margin-top: 20px;
+}
+ul.nav-tabs {
+    display: flex;
+    flex-flow: row;
+    width: 1280px;
+    height: 40px;
+    text-transform: capitalize;
+    margin: 0 auto;
+    gap: 2em;
+    margin-bottom: 40px;
+
+}
+ul.nav-tabs li{
+    opacity: 0.7;
+}
+ul.nav-tabs li:hover {
+    opacity: 1
+}
+ul.nav-tabs li.active{
+    border-bottom:4px solid #158EFD;
+    color: #158EFD;
+}
+.nav-tabs .single-nav-tabs-list, .all-nav-tabs-list{
+    cursor: pointer;
+    color: #2F2E64;
+    font-size: 18px;
+}
+.tab-pane h1{
+    align-items: center;
 }
