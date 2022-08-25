@@ -108,3 +108,97 @@ ul.nav-tabs li.active{
 .tab-pane h1{
     align-items: center;
 }
+.wpb-recent-post-main-container {
+    width: 1280px;
+    height: 520px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+.wpb-recent-posts-featured-img img {
+    width: 880px;
+    height: 520px;
+    float: left;
+    background: #F2F5FC;
+    border-radius: 16px 0px 0px 16px;
+}
+.wpb-recent-posts-title a {
+    font-family: 'MADE Tommy Soft', sans-serif;
+    position: absolute;
+    font-size: 32px;
+    line-height: 40px;
+    align-items: center;
+    letter-spacing: -0.2px;
+    color: #2F2E64;;
+    text-decoration: none;
+}
+.wpb-recent-posts-content-container{
+    float: right;
+    width: 400px;
+    height: 520px;
+    background: #FFFFFF;
+    border-radius: 0px 16px 16px 0px;
+    padding-left: 48px;
+    filter: drop-shadow(40px 40px 64px rgba(243, 243, 252, 0.4));
+}
+/* .wpb-recent-post-main-container  .inner-container{
+    display: flex;
+    gap: 1rem;
+} */
+.wpb-recent-posts-category-frame {
+    display: flex;
+    background-color: #fff;
+    border: 2px solid #EFF4FF;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 160px;
+    height: 32px;
+    margin-top: 52px;
+}
+.wpb-recent-posts-category-frame .wpb-recent-posts-category a {
+    color: #35C876;
+    text-decoration: none;
+    font-family: 'MADE Tommy Soft', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.15px;
+    text-transform: capitalize;
+}
+.wpb-recent-posts-content{
+    width: 304px;
+    height: 84px;
+    margin-top: 150px;
+    color: #656F79;
+    font-size: 16px;
+    letter-spacing: -0.2px;
+}
+.wpb-recent-posts-datetime {
+    margin-top: 56px;
+    height: 28px;
+    width: 304px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #E4E6EB;
+    padding-top: 24px;
+    color: #656F79;
+    letter-spacing: -0.2px;
+    font-size: 16px;
+}
+.wpb-recent-posts-datetime span > a {
+    color: #656F79;
+    text-transform: uppercase;
+    /* text-decoration: none; */
+}
+.wpb-recent-posts-title h2 > a {
+    width: 304px;
+    height: 160px;
+}
+.investors-content .tab-pane {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+    width: 1280px;
+}

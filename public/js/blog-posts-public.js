@@ -65,20 +65,31 @@ $(document).ready(function(){
 			}
 		});
 	});
+	// // Display All Posts When open blog page 
+	// if ($(".all-nav-tabs-list")) {
+	// 	$(".wpb-sub-container").each(function(){
+	// 		$(this).show();
+	// 	});
+	// }
+
 	// Displayed All Posts When Click on All nav tab list
 	$('.all-nav-tabs-list').on( "click", function(e) {
 		e.preventDefault();
-		$(".investors-content .tab-pane").each(function(){
+		$(".wpb-all-content-container").each(function(){
 			$(this).show();
+			$('.investors-content .tab-pane').hide();
 		});
 	});
-	// Displayed All Posts When open blog page 
-	if ($(".all-nav-tabs-list")) {
-		$(".investors-content .tab-pane").each(function(){
-			$(this).show();
+	
+	// Display Posts When Click on specific category tab
+	$('.single-nav-tabs-list').on( "click", function(e) {
+		e.preventDefault();
+		$(".wpb-all-content-container").each(function(){
+			$(this).hide();
 		});
-	}
-	// Added active class on All nav tab list
+	});
+	
+	// Add active class on All nav tab list
 	$(".all-nav-tabs-list").addClass("active");
 	$(".all-nav-tabs-list").click(function () {
 		if($(".all-nav-tabs-list").hasClass("active")){
