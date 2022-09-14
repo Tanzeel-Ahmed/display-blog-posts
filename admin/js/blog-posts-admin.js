@@ -29,4 +29,17 @@
 	 * practising this, we should strive to set a better example in our own work.
 	 */
 
+	 
+$(document).ready(function(){
+
+	$('#wpb_posts_per_page').on("input",function(){
+		$('#submit').prop('disabled',false);
+		if(this.value == '0'){
+			$('#submit').prop('disabled',true);
+			alert('Kindly Enter Value other than 0')
+		}
+	})
+})
+	 
 })( jQuery );
+

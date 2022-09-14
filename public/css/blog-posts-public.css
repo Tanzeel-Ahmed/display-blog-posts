@@ -2,9 +2,18 @@
  * All of the CSS for your public-facing functionality should be
  * included in this file.
  */
+ header.entry-header {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+/* .entry-header > h1 {
+    margin-left: 280px;
+} */
 .wpb-main-container{
-    width: 1280px;
-    height: 1178px;
+    width: 100%;
+    max-width: 1280px !important;
+    height: 100%;
     margin: 0 auto;
 }
 .site-inner {
@@ -88,13 +97,20 @@ ul.nav-tabs {
     margin: 0 auto;
     gap: 2em;
     margin-bottom: 40px;
+    list-style-type: none;
 
+}
+.entry-content ul {
+    padding-left: 0px;
 }
 ul.nav-tabs li{
     opacity: 0.7;
 }
 ul.nav-tabs li:hover {
     opacity: 1
+}
+.entry-content ul > li {
+    list-style-type: none;
 }
 ul.nav-tabs li.active{
     border-bottom:4px solid #158EFD;
@@ -109,7 +125,8 @@ ul.nav-tabs li.active{
     align-items: center;
 }
 .wpb-recent-post-main-container {
-    width: 1280px;
+    width:100%;
+    max-width: 1280px!important;
     height: 520px;
     margin: auto;
     margin-bottom: 40px;
@@ -140,10 +157,9 @@ ul.nav-tabs li.active{
     padding-left: 48px;
     filter: drop-shadow(40px 40px 64px rgba(243, 243, 252, 0.4));
 }
-/* .wpb-recent-post-main-container  .inner-container{
+.wpb-recent-post-main-container  .inner-container{
     display: flex;
-    gap: 1rem;
-} */
+}
 .wpb-recent-posts-category-frame {
     display: flex;
     background-color: #fff;
@@ -201,4 +217,9 @@ ul.nav-tabs li.active{
     justify-content: space-between;
     flex-flow: wrap;
     width: 1280px;
+}
+@media only screen and (min-width: 960px){
+    .content {
+    width: 100%!important;
+    }
 }

@@ -31,14 +31,19 @@
 	
 // custom ajax for load more posts
 $(document).ready(function(){
+		if($('.load-more-btn').data('totalpages') == '1'){
+			$('.load-more-btn').remove();
+		}
 		var currentPage = 1;
 		$('.load-more-btn').click(function(){
 			var total_pages = $('.load-more-btn').data('totalpages');
+		
 			currentPage	++;
 			var data = {
 				'action'    : 'wpb_load_more_posts',
 				'paged'     : currentPage,
 			};
+	
 			// since 2.8 ajaxurl is always defined in the admin header and points to admin-ajax.php
 			jQuery.post(jquery_object.ajaxurl, data, function(response) {
 				if(total_pages == currentPage){
@@ -65,7 +70,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-	// // Display All Posts When open blog page 
+	// Display All Posts When open blog page 
 	// if ($(".all-nav-tabs-list")) {
 	// 	$(".wpb-sub-container").each(function(){
 	// 		$(this).show();
@@ -77,7 +82,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		$(".wpb-all-content-container").each(function(){
 			$(this).show();
-			$('.investors-content .tab-pane').hide();
+			$('.investors-content .tab-pane').remove();
 		});
 	});
 	

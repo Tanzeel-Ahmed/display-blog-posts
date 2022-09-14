@@ -177,10 +177,13 @@ class Blog_Posts {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 		/*This is Template Hook and Filter the page_template with our custom function*/
-		$this->loader->add_filter('page_template', $plugin_public, 'wpb_page_template');
+		$this->loader->add_filter('theme_page_templates', $plugin_public, 'wpb_register_page_template',10,3);
+		$this->loader->add_filter('template_include', $plugin_public, 'my_template_select',99);
 		// ajax hook for load more posts
 		$this->loader->add_action( 'wp_ajax_wpb_load_more_posts', $plugin_public,'wpb_load_more_posts' );
 		$this->loader->add_action( 'wp_ajax_nopriv_wpb_load_more_posts', $plugin_public,'wpb_load_more_posts');
+		// shortcode for blog page
+		$this->loader->add_shortcode('wpb-shortcode', $plugin_public, 'shortcode_for_blogs_page');
 		
 	}
 

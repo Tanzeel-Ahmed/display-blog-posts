@@ -3,6 +3,7 @@
  * Template Name: My Custom Blog Page 
  */
 get_header();
+
 // Recently added post. Display on the top
 ?>
 <div class="wpb-recent-post-main-container">
